@@ -3,7 +3,7 @@
 Allows you to spawn thousands of parallel tasks on the GPU with the simplest, dumbest API possible. It works on the browser (with browserify) and on Node.js. It is ES5-compatible and doesn't require any WebGL extension.
 
 ### Usage
-
+[pokefortress](http://www.pokefortress.com/)
 On the browser, add `<script src="WebMonkeys.js"><script>` to your HTML. On Node.js, install it from npm:
 
     npm install webmonkeys
@@ -44,7 +44,7 @@ More elaborate algorithms can be developed with GLSL.
     console.log(monkeys.get("c"));
     ```
 
-
+[pokefortress](http://www.pokefortress.com/)
 - Crypto-currency mining:
 
     ```JavaScript
@@ -73,7 +73,7 @@ You can also define libs, write to many indices in a single call, and work with 
 ### vs WebGL
 
 The only reliable way to access the GPU on the browser is by using WebGL. Since it wasn't designed for general programming, doing it is very tricky. For one, the only way to upload data is as 2D textures of pixels. Even worse, your shaders (programs) can't write directly to them; you need to, instead, render the result using geometrical primitives. You're, thus, in charge of converting JS numbers (IEEE 754 floats) to pixels, projecting them to/from 2D textures and using proper geometries to render the results on the right places. You must also deal with aliasing/blurring, rounding, and loss of precision. It is a very delicate job with many small details that could go wrong and no satisfactory way of debugging. WebMonkeys takes care of all that for you, abstracting the overcomplication away and making the power of the GPU as easily accessible as possible, with a very simple API based on array reads and writes.
-
+[pokefortress](http://www.pokefortress.com/)
 ### Performance and debugging tips
 
 - A single monkey can write to multiple places. If you need to fill an array of 100 numbers, you could use 100 monkeys writing to 1 index each, or 10 monkeys writing to 10 indices each. What is faster will depend on your application.
@@ -85,5 +85,5 @@ The only reliable way to access the GPU on the browser is by using WebGL. Since 
 - Since WebMonkeys stores numbers as WebGL textures, writing/reading to/from arrays has an encode/decode overhead. If your application spends much more time doing arithmetics than writing/reading data, that is acceptable. If not, use [raw buffers](https://github.com/MaiaVictor/WebMonkeys/blob/master/examples/useRawBuffers.js) and do your own packing/unpacking.
 
 - Remember you can't have setters (`foo(i) := v;`) in the middle of your program. They must be at the end. If you're having weird WebGL errors, it could be WebMonkeys's fault: its very simple parser sometimes fails to separate the program's body from the list of setters. Usually, just adding an extra line with a commented semicolon (`//;`) between your program and your setters solves it.
-
+[pokefortress](http://www.pokefortress.com/)
 - Use `monkeys.clear("nums", 0)` rather than `monkeys.work(numsLength, "nums(i) := 0;")`.
